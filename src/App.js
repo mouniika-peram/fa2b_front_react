@@ -7,6 +7,8 @@ import Homepage from './global/Homepage';
 
 import Rootlayout from './global/Rootlayout';
 
+import ProductRootLayout from './components/redux_components/products/productRootLayout';
+
 import Error from './global/Error';
 // Way 1
 // ***********************************
@@ -16,7 +18,7 @@ import Error from './global/Error';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import ReduxProduct from './components/redux_components/products';
+import ReduxProduct from './components/redux_components/products/ReduxProduct';
 
 const router = createBrowserRouter([
   {
@@ -25,9 +27,19 @@ const router = createBrowserRouter([
     element:<Rootlayout/>,
     children:[
     {  path:"/",element:<Homepage/>  },
-    {  path:"/product",element:<ReduxProduct/>  }
+
+    {
+      path:'/product',
+      errorElement:<Error />,
+      element:<ProductRootLayout/>,
+      children:[
+      {  path:"/product",element:<ReduxProduct/>  },
+      // {  path:"/product",element:<ReduxProduct/>  }
+      ]
+    }
     ]
-  }
+  },
+  
 ])
 
 

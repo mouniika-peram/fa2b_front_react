@@ -5,7 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
-import { Link } from 'react-router-dom';
+import { Link ,NavLink} from 'react-router-dom';
 
 
 function Header() {
@@ -19,8 +19,11 @@ function Header() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href=""><Link to="/product" >redux-useEffect</Link></Nav.Link>
+            {/* <Nav.Link href=""><Link to="/product" >redux-useEffect</Link></Nav.Link> */}
+
+            <NavLink to="/product">redux-useEffect</NavLink>
             <Nav.Link href="#link">Link</Nav.Link>
+
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
