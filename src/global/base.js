@@ -8,7 +8,7 @@
 
 // Live API
 // -------------------------
-export const baseUrl ="https://fa2b-back.onrender.com"
+export const baseUrl ="https://fa2b-back.onrender.com/api/v1/"
 
 
 
