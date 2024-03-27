@@ -1,29 +1,65 @@
 import logo from './logo.svg';
 import './App.css';
-import Product from './components/product';
+
+import { createBrowserRouter,Route,RouterProvider, createRoutesFromElements} from 'react-router-dom';
+
+import Homepage from './global/Homepage';
+
+import Rootlayout from './global/Rootlayout';
+
+import Error from './global/Error';
+// Way 1
+// ***********************************
+// const router=createBrowserRouter([
+//   {path:"/",element:<Homepage/>},
+// ]);
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import ReduxProduct from './components/redux_components/products';
+
+const router = createBrowserRouter([
+  {
+    path:'/',
+    errorElement:<Error />,
+    element:<Rootlayout/>,
+    children:[
+    {  path:"/",element:<Homepage/>  },
+    {  path:"/product",element:<ReduxProduct/>  }
+    ]
+  }
+])
+
+
+
+
+
+
+// Alternate way of routing - way 2
+// ***********************************
+{/* <Route path="/"> <Homepage/></Route> */}
+// ***********************************
+
+
+// way 3
+// ***********************************
+// const routerDefinations =createRoutesFromElements(
+//   <Route>
+//     <Route path="/"><Homepage/></Route>
+//   </Route>
+// )
+// const router = createRouter(routerDefinations)
+// ***********************************
+
+
 
 
 function App() {
   return (
-    <div className="App">
-       <Product/>
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
 
-       
-      </header> */}
-    </div>
+    <RouterProvider  router={router}/>
+
+   
   );
 }
 
