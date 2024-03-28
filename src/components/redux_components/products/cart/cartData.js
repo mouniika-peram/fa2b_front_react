@@ -17,21 +17,11 @@ function CartData({cart}){
   const dispatchActions = useDispatch()
 
   const increment=(cartRecord)=>{
-    console.log("inc")
-    console.log(cartRecord)
     axios.post(`${baseUrl}cart/udt_cart_qty/`,{...cartRecord,"type":"increment"}).then((res)=>{
-
       dispatchActions(cartActions.IncrementQty({"id":cartRecord.id}))
-
-
-
-
-
     }).catch((err)=>{
       console.log(err)
-
     })
-
   }
 
   
@@ -46,6 +36,18 @@ function CartData({cart}){
     
   }
 
+  const deleteCartitem=(cartRecord)=>{
+    console.log("dec")
+    axios.delete(`${baseUrl}cart/${cartRecord.id}/`).then((res)=>{
+      console.log(res?.data)
+      dispatchActions(cartActions.DeleteCartItem({"id":cartRecord.id}))
+    }).catch((err)=>{
+
+    })
+    
+  }
+ 
+
   
 
   return(
@@ -53,7 +55,7 @@ function CartData({cart}){
     
     {
       cart?.items?.map((e,index)=> <CartItem data={e} key={index} increment={increment}
-      decrement={decrement}/>)
+      decrement={decrement} deleteCartitem={deleteCartitem}/>)
       }
       </>
   )
@@ -63,7 +65,7 @@ export default CartData
 
 
 
-function CartItem({data,increment,  decrement}) {
+function CartItem({data,increment,  decrement,deleteCartitem}) {
 
 
 
@@ -79,6 +81,7 @@ function CartItem({data,increment,  decrement}) {
 
           <button onClick={(e)=>{increment(data)}}>+</button>
           <button onClick={(e)=>decrement(data)}>-</button>
+          <button onClick={(e)=>deleteCartitem(data)}>delete</button>
        
       </Row>
     </Container>

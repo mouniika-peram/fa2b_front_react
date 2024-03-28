@@ -11,7 +11,6 @@ function CartModal({show,handleClose}) {
 
   const cart=useSelector((state)=>state.cart)
 
-  
 
 
 
