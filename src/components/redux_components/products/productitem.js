@@ -3,7 +3,13 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 
-function Productitem({data}) {
+function Productitem({data,AddToCart}) {
+
+
+
+
+
+
   return (
    <>
     <Card style={{ width: '18rem' }}>
@@ -15,7 +21,7 @@ function Productitem({data}) {
     </Card.Text>
     <div className="d-flex align-items-center justify-content-between">
       <div>
-      <Button variant="primary">Add to cart</Button>
+      <Button variant="primary" onClick={()=>AddToCart(data)}>Add to cart</Button>
       </div>
       <div>
       <p variant="primary">Price :{data?.price}</p>

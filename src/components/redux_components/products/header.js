@@ -6,8 +6,11 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 
 import { Link ,NavLink} from 'react-router-dom';
 
-
+import { useSelector } from 'react-redux';
 function Header() {
+
+  const cartQty= useSelector((state)=> state.cart.totalQty)
+
   return (
     
 <Navbar expand="lg" className="bg-body-tertiary">
@@ -19,7 +22,7 @@ function Header() {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <NavLink to="/product">
-                cart
+                cart {cartQty}
             </NavLink>
           </Nav>
         </Navbar.Collapse>
