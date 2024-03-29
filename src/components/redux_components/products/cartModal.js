@@ -7,11 +7,9 @@ import CartData from './cart/cartData';
 
 
 
-function CartModal({show,handleClose}) {
+function CartModal({show,handleClose,loading}) {
 
   const cart=useSelector((state)=>state.cart)
-
-
 
 
   
@@ -26,7 +24,7 @@ function CartModal({show,handleClose}) {
         </Modal.Header>
         <Modal.Body>
 
-          <CartData cart={cart} />
+         {loading?"Loading please wait": <CartData cart={cart} />}
          
           </Modal.Body>
         <Modal.Footer>

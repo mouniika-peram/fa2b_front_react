@@ -13,14 +13,17 @@ import { UseSelector, useDispatch } from "react-redux";
 
 function ReduxProduct() {
   const [products, setProducts] = useState([]);
+  const [loading, setModalLoading] = useState(false);
+  const [prdloding, setProductsLoad] = useState(true);
+
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+    setShow(true);
+    setModalLoading(true);
+  };
 
   const dispatchActions = useDispatch();
-
-  
-
 
   useEffect(() => {
     let productApi = axios.get(`${baseUrl}product/`);
@@ -32,27 +35,34 @@ function ReduxProduct() {
         axios.spread((prdRes, cartRes) => {
           setProducts(prdRes?.data);
           dispatchActions(cartActions.udt_cart_items(cartRes?.data));
+          setProductsLoad(false)
         })
       )
       .catch((err) => {});
   }, []);
 
   const AddToCart = (PrdDetails) => {
+    handleShow();
+
     axios
       .post(`${baseUrl}cart/`, { ...PrdDetails, qty: 1 })
       .then((res) => {
-        dispatchActions(cartActions.IncrementQty({"id":res?.data?.id}));
-        handleShow();
+        // console.log(res);
+        // dispatchActions(cartActions.udt_cart_items(cartRes?.data));
+        dispatchActions(cartActions.IncrementQty(res?.data));
+        setModalLoading(false);
       })
       .catch((err) => {});
   };
 
   return (
     <div>
-      <CartModal show={show} handleClose={handleClose} />
+      <CartModal loading={loading} show={show} handleClose={handleClose} />
       <Container>
         <Row>
-          {products?.length > 0 ? (
+          {prdloding ? (
+            "Products are Loading"
+          ) : products?.length > 0 ? (
             products?.map((e, index) => (
               <Col key={index}>
                 <Productitem data={e} AddToCart={AddToCart} />

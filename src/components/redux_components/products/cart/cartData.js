@@ -80,7 +80,7 @@ function CartItem({data,increment,  decrement,deleteCartitem}) {
           <p>Net Amount: {data?.net_amt}</p>
 
           <button onClick={(e)=>{increment(data)}}>+</button>
-          <button onClick={(e)=>decrement(data)}>-</button>
+          <button disabled={data?.qty>1?false:true} onClick={(e)=>decrement(data)}>-</button>
           <button onClick={(e)=>deleteCartitem(data)}>delete</button>
        
       </Row>

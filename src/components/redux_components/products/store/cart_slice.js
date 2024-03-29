@@ -10,6 +10,7 @@ const cartslice=createSlice({
             state.items=action.payload;
             state.totalQty=(action.payload).length;
         },
+       
         // udt_and_add_cart_items(state,action){
         //     state.items=action.payload;
         //     state.totalQty=(action.payload).length;
@@ -17,12 +18,14 @@ const cartslice=createSlice({
         IncrementQty(state,action){
             const {id}=action.payload;
             const itemexist=state.items?.find((e)=>e.id==id)
+            if(itemexist){
             const updatedQty=itemexist.qty+1
             itemexist.qty=updatedQty
             itemexist.net_amt=updatedQty*itemexist.prd_price
             const itemIndex=state.items?.findIndex((e)=>e.id==id)
-            if(itemexist){
                 state.items[itemIndex]=itemexist
+            }else{
+                state.items=[...state.items,{...action.payload}]
             }
         },
         DecrementQty(state,action){
